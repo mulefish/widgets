@@ -4,24 +4,27 @@ import ToggleVisibleWidget from './widgets/ToggleVisibleWidget'
 import DropdownWidget from './widgets/DropDownWidget'
 
 import DropDownWidgetMultiple from './widgets/DropDownWidgetMultiple'
-import PdfThing from './widgets/PdfThing'
+import PdfModify from './widgets/PdfModify'
+import PdfDisplayer from './widgets/PdfDisplayer'
 
 
 
 function App() {
   return (
     <div className="App">
-          <PdfThing />
-          <hr></hr>
-          <DropdownWidget />
-          <hr></hr>
-          <DropDownWidgetMultiple />
-          <hr></hr>
-          <ButtonWidget id='InputButtonWidget' />
-          <hr></hr>
-          <ToggleVisibleWidget id='ToggleVisibleWidget' />
-          <hr></hr>
-  
+      <PdfDisplayer />
+      <hr ></hr>
+      <PdfModify />
+      <hr></hr>
+      <DropdownWidget />
+      <hr></hr>
+      <DropDownWidgetMultiple />
+      <hr></hr>
+      <ButtonWidget id='InputButtonWidget' />
+      <hr></hr>
+      <ToggleVisibleWidget id='ToggleVisibleWidget' />
+      <hr></hr>
+
     </div>
   );
 }

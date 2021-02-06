@@ -4,7 +4,7 @@ import React from 'react'
 import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
 
-async function getAndModifyPdf() {
+async function getAndModifyPdf(someMessage) {
     const url = 'https://pdf-lib.js.org/assets/with_update_sections.pdf'
     const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
@@ -14,7 +14,7 @@ async function getAndModifyPdf() {
     const pages = pdfDoc.getPages()
     const firstPage = pages[0]
     const { width, height } = firstPage.getSize()
-    firstPage.drawText('This text was added with JavaScript!', {
+    firstPage.drawText(someMessage, {
         x: 5,
         y: height / 2 + 300,
         size: 50,
@@ -30,25 +30,23 @@ async function getAndModifyPdf() {
 
 
 
-const renderInIframe = (pdfBytes) => {
+const renderInIframe = (pdfBytes, startTime) => {
     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
     const blobUrl = URL.createObjectURL(blob);
-    document.getElementById('iframe').src = blobUrl;
+    document.getElementById('iframe_pdf_modify').src = blobUrl;
+    let delta = new Date().getTime() - startTime
+    delta /= 1000
+    console.log("It took this long to fetch, modify & render the pdf, in seconds: " + delta)
 };
 
 
+
 const doPdfLogic = () => {
-    try {
+    const t1 = new Date().getTime()
 
-        const t1 = new Date().getTime()
-
-        const pdfBytes = getAndModifyPdf()
-        renderInIframe(pdfBytes)
-        const t2 = new Date().getTime() - t1
-        alert("yayDone and it took " + t2 + " and I have this many bytes " + pdfBytes)
-    } catch (boom) {
-        alert(boom)
-    }
+    // const pdfBytes = getAndModifyPdf()
+    // renderInIframe(pdfBytes)
+    getAndModifyPdf("This is a messsage!").then(pdfBytes => renderInIframe(pdfBytes, t1))
 
 
 }
@@ -56,15 +54,9 @@ const doPdfLogic = () => {
 
 const PdfThing = () => {
     return (
-        <div>PdfThing! Zoom !!
-
-            <iframe id="iframe"></iframe>
-
-
-            <button onClick={() => doPdfLogic()} >doPdfLogic()</button>
-
-
-
+        <div>
+            <iframe id="iframe_pdf_modify"></iframe>
+            <button onClick={() => doPdfLogic()} >PdfModify</button>
         </div>
     )
 }
