@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import ButtonWidget from './widgets/ButtonWidget'
+import ToggleVisibleWidget from './widgets/ToggleVisibleWidget'
+// ZERO STYLING - As simple as possible
+import DropdownWidget from './widgets/DropDownWidget'
+
+import DropDownWidgetMultiple from './widgets/DropDownWidgetMultiple'
+import PdfThing from './widgets/PdfThing'
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+          <PdfThing />
+          <hr></hr>
+          <DropdownWidget />
+          <hr></hr>
+          <DropDownWidgetMultiple />
+          <hr></hr>
+          <ButtonWidget id='InputButtonWidget' />
+          <hr></hr>
+          <ToggleVisibleWidget id='ToggleVisibleWidget' />
+          <hr></hr>
+  
     </div>
   );
 }

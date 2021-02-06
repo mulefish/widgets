@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/pdf-lib"></script>
+  </head>
+
+  <body>
+    <iframe id="pdf" style="width: 50%; height: 100%;"></iframe>
+  </body>
+Hello<hr>
+  <script>
+    createPdf();
+    async function createPdf() {
+        try { 
+      const pdfDoc = await PDFLib.PDFDocument.create();
+      const page = pdfDoc.addPage([350, 400]);
+      page.moveTo(110, 200);
+      page.drawText('Hello World!');
+      const pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: true });
+      document.getElementById('pdf').src = pdfDataUri;
+        } catch(boom) {
+            alert( boom )
+        }
+    }
+  </script>
+</html>
